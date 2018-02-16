@@ -1,0 +1,5 @@
+SUCCESS - Test sample-maven-plugin-test-suite-selectors-maven-projectFlowTest finished Successfully.
+
+===================================================================================
+Number of tests run: 1 - Failed: 0 - Errors: 0 - Skipped: 0 - Time elapsed: 1.237ms
+===================================================================================
