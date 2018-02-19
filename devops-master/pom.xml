@@ -58,12 +58,18 @@
 				<executions>
 				<execution>
 						<id>deploy</id>
-						<phase>package</phase>			
+				<phase>package</phase>
 						<goals>
 							<goal>deploy</goal>
 						</goals>
 					</execution>
-				
+				<execution>
+						<id>deploy1</id>
+					<phase>post-execution</phase>
+						<goals>
+							<goal>unDeploy</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			
@@ -130,13 +136,14 @@
 
 	<!-- Mule Dependencies -->
 	<dependencies>
-		<!-- Xml configuration -->
-		<dependency>
-			<groupId>com.mulesoft.muleesb</groupId>
-			<artifactId>mule-core-ee</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.mule/mule-core -->
+<dependency>
+    <groupId>org.mule</groupId>
+    <artifactId>mule-core</artifactId>
+    <version>${mule.version}</version>
+</dependency>
+		
 		<!-- Xml configuration -->
 		<dependency>
 			<groupId>com.mulesoft.muleesb.modules</groupId>
@@ -222,8 +229,19 @@
     <dependency>
             <groupId>com.mulesoft.weave</groupId>
             <artifactId>mule-plugin-weave_2.11</artifactId>
+            <version>4.0.0-M4</version>
+            <scope>provided</scope>
+        </dependency>
+    <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-db</artifactId>
             <version>${mule.version}</version>
             <scope>provided</scope>
+        </dependency>
+    <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
         </dependency>
     </dependencies>
 
