@@ -159,7 +159,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- for testing -->
-		
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-schedulers</artifactId>
