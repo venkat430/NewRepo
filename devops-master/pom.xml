@@ -14,8 +14,8 @@
 
 		<mule.version>3.8.0</mule.version>
 		<mule.tools.version>1.2</mule.tools.version>
-	<munit.version>1.2.1</munit.version>
-    <mule.munit.support.version>3.8.0</mule.munit.support.version>
+	<munit.version>1.3.3</munit.version>
+    <mule.munit.support.version>3.8.3</mule.munit.support.version>
     </properties>
 	
 	 <distributionManagement>
@@ -25,6 +25,7 @@
          <url>file:///C:/Users/db2admin.bandaru-PC/.jenkins/workspace/DEVOPS/target</url>
        </repository>
    </distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -36,7 +37,7 @@
 					<copyToAppsDirectory>true</copyToAppsDirectory>
 				</configuration>
 			</plugin>
-			<plugin>          
+			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>2.0</version>
@@ -47,27 +48,23 @@
 					<password>Happy212</password>
 					<workerType>Micro</workerType>
 					<environment>Sandbox</environment>
-				<workers>1</workers>
+					<workers>1</workers>
 					<properties>
 						<mule.env>prod</mule.env>
+						
 					</properties>
+
+
 					<redeploy>true</redeploy>
 
 					<type>zip</type>
 				</configuration>
 				<executions>
-				<execution>
+					<execution>
 						<id>deploy</id>
-				<phase>package</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>deploy</goal>
-						</goals>
-					</execution>
-				<execution>
-						<id>deploy1</id>
-					<phase>post-execution</phase>
-						<goals>
-							<goal>unDeploy</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -100,7 +97,29 @@
 					</execution>
 				</executions>
 			</plugin>
-		
+		<plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+                <version>${munit.version}</version>
+               
+                <configuration>
+                    <coverage>
+                        <runCoverage>true</runCoverage>
+                        <formats>
+                            <format>html</format>
+                        </formats>
+                    </coverage>
+                </configuration>
+                 <executions>
+                    <execution>
+                        <id>DEPLOY</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                    </executions>
+            </plugin>
         </plugins>
 	<testResources>
             <testResource>
@@ -114,82 +133,100 @@
 
 	<!-- Mule Dependencies -->
 	<dependencies>
-	
-		<!-- https://mvnrepository.com/artifact/org.mule/mule-core -->
-<dependency>
-    <groupId>org.mule</groupId>
-    <artifactId>mule-core</artifactId>
-    <version>${mule.version}</version>
-</dependency>
-		
 		<!-- Xml configuration -->
-		
+		<dependency>
+			<groupId>com.mulesoft.muleesb</groupId>
+			<artifactId>mule-core-ee</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Xml configuration -->
+		<dependency>
+			<groupId>com.mulesoft.muleesb.modules</groupId>
+			<artifactId>mule-module-spring-config-ee</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Mule Transports -->
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-file</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-http</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>com.mulesoft.muleesb.transports</groupId>
+			<artifactId>mule-transport-jdbc-ee</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.muleesb.transports</groupId>
+			<artifactId>mule-transport-jms-ee</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-vm</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<!-- Mule Modules -->
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-scripting</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-xml</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<!-- for testing -->
 		<dependency>
-    <groupId>com.mulesoft.munit</groupId>
-    <artifactId>mule-munit-support</artifactId>
-    <version>3.8.5</version>
-    <scope>test</scope>
-</dependency>
-
-    <dependency>
-            <groupId>com.mulesoft.munit</groupId>
-            <artifactId>munit-runner</artifactId>
-            <version>1.1.1</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.mule.tests</groupId>
+			<artifactId>mule-tests-functional</artifactId>
+			<version>${mule.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-schedulers</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-spring-config</artifactId>
 			<version>${mule.version}</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
-	
-   <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-db</artifactId>
+	<dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>mule-munit-support</artifactId>
+            <version>${mule.munit.support.version}</version>
+            <scope>test</scope>
+        </dependency>
+    <dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-runner</artifactId>
+            <version>${munit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    <dependency>
+            <groupId>com.mulesoft.weave</groupId>
+            <artifactId>mule-plugin-weave_2.11</artifactId>
             <version>${mule.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     <dependency>
             <groupId>mysql</groupId>
@@ -197,6 +234,7 @@
             <version>5.1.6</version>
         </dependency>
     </dependencies>
+
 	<repositories>
 		<repository>
 			<id>Central</id>
@@ -222,4 +260,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
 </project>
