@@ -172,7 +172,6 @@
 			<version>${mule.version}</version>
 			<scope>compile</scope>
 		</dependency>
-	
    <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-db</artifactId>
