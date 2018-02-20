@@ -67,7 +67,7 @@
 						<id>deploy1</id>
 					<phase>package</phase>
 						<goals>
-							<goal>unDeploy</goal>
+							<goal>undeploy</goal>
 						</goals>
 					</execution>
 				</executions>
