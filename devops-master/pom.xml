@@ -73,12 +73,36 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/main/app/</directory>
+								</resource>
+								<resource>
+									<directory>src/main/api/</directory>
+								</resource>
+								<resource>
+									<directory>mappings/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			
 	<testResources>
-            <testResource>
-                <directory>src/test/munit</directory>
-            </testResource>
+            
         <testResource>
                 <directory>src/test/resources</directory>
             </testResource>
@@ -132,12 +156,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- for testing -->
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
-			<version>${mule.version}</version>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-schedulers</artifactId>
