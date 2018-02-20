@@ -159,7 +159,19 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- for testing -->
-		
+		<dependency>
+    <groupId>com.mulesoft.munit</groupId>
+    <artifactId>mule-munit-support</artifactId>
+    <version>3.8.5</version>
+    <scope>test</scope>
+</dependency>
+
+    <dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-runner</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-schedulers</artifactId>
